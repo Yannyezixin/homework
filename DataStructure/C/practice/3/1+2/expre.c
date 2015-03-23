@@ -91,3 +91,38 @@ char *infix_to_postfix(char *infix, sq_stack sq)
     output[index] = '\0';
     return output;
 }
+
+float cal_postfix(char *postfix, float stack[])
+{
+    float op_a, op_b;
+    int num, idx = -1;
+    char *c = postfix;
+
+    for (; *c != 0;) {
+        if (is_operator(*c) == 1) {
+            op_b = stack[idx--];
+            op_a = stack[idx--];
+            if (*c == '+') {
+                stack[++idx] = op_a + op_b;
+            } else if (*c == '-') {
+                stack[++idx] = op_a - op_b;
+            } else if (*c == '*') {
+                stack[++idx] = op_a * op_b;
+            } else {
+                stack[++idx] = op_a / op_b;
+            }
+            c++;
+        } else if (*c >= '0' && *c <= '9'){
+            num = 0;
+            while (c != 0 && (*c >= '0' && *c <= '9')) {
+                num = num * 10 + *c - '0';
+                c++;
+            }
+            stack[++idx] = (float) num;
+        } else {
+            c++;
+        }
+    }
+
+    return stack[0];
+}

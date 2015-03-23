@@ -25,5 +25,6 @@ enum status sq_stack_push(sq_stack *, elem_type);
 enum status sq_stack_pop(sq_stack *, elem_type *);
 enum status sq_stack_top(sq_stack *, elem_type *);
 char *infix_to_postfix(char *, sq_stack);
+float cal_postfix(char *, float []);
 
 #endif
