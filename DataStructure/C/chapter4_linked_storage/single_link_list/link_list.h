@@ -24,5 +24,8 @@ lnode *ll_next_elem(lnode *);
 lnode *ll_make_node(elem_type);
 enum status ll_insert_after(lnode *, lnode *);
 enum status ll_delete_after(lnode *, elem_type *);
+enum status ll_create_list(link_list *, int, elem_type *);
+enum status ll_inverse_list(link_list *);
+enum status ll_merge_list(link_list *, link_list *, link_list *);
 
 #endif

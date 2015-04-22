@@ -116,6 +116,43 @@ static char *test_ll_search()
     return OK;
 }
 
+static char *test_ll_create()
+{
+    link_list ll, llb;
+    elem_type e[6] = {'a', 'b', 'c', 'd', 'f', 'g'};
+    assert("Create link list failed.", ll_create_list(&ll, 6, e) == LL_FALSE);
+    elem_type b[10] = {'a', 'b', 'c', 'd', 'f', 'g', 'a', 'b', 'g', 'g'};
+    assert("Create link list failed.", ll_create_list(&llb, 10, b) == LL_FALSE);
+    print_ll("Create", ll);
+    print_ll("Create", llb);
+
+    return OK;
+}
+
+static char *test_ll_inverse()
+{
+    link_list ll;
+    elem_type e[6] = {'a', 'b', 'c', 'd', 'f', 'g'};
+    assert("Create link list failed.", ll_create_list(&ll, 6, e) == LL_FALSE);
+    assert("Inverse link list failed.", ll_inverse_list(&ll) == LL_FALSE);
+    print_ll("Inverse", ll);
+
+    return OK;
+}
+
+static char *test_ll_merge()
+{
+    link_list lla, llb, llc;
+    elem_type ea[6] = {'a', 'c', 'g', 'h', 'j', 'l'};
+    elem_type eb[6] = {'b', 'd', 'i', 'k', 'x', 'y'};
+    assert("Create link list lla failed.", ll_create_list(&lla, 6, ea) == LL_FALSE);
+    assert("Create link list llb failed.", ll_create_list(&llb, 6, eb) == LL_FALSE);
+    assert("Merge link list llc failed.", ll_merge_list(&lla, &llb, &llc) == LL_FALSE);
+    print_ll("Merge", llc);
+
+    return OK;
+}
+
 
 static char *run()
 {
@@ -123,6 +160,9 @@ static char *run()
     run_test(test_ll_delete);
     run_test(test_ll_destroy);
     run_test(test_ll_search);
+    run_test(test_ll_create);
+    run_test(test_ll_inverse);
+    run_test(test_ll_merge);
     return OK;
 }
 
